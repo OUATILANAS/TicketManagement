@@ -1,0 +1,28 @@
+<!-- ErrorDialogComponent HTML -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Dialog</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="bg-white shadow-md rounded-lg max-w-sm mx-auto p-4">
+        <h4 class="text-center text-lg font-semibold text-red-600">Validation Errors</h4>
+        <div class="mt-2">
+            <ul class="list-disc pl-5">
+                <li *ngFor="let error of data.errors" class="text-red-500 text-sm">{{ error }}</li>
+            </ul>
+        </div>
+        <div class="flex justify-end mt-4">
+            <button 
+                class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600 transition duration-200"
+                mat-button 
+                mat-dialog-close>
+                Close
+            </button>
+        </div>
+    </div>
+</body>
+</html>

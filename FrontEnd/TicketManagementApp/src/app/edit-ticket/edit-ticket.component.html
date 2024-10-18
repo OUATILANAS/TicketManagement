@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Management</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+<div class="container mx-auto mt-5">
+    <div class="bg-white shadow-md rounded-lg">
+        <div class="p-5">
+            <h4 class="text-center text-2xl font-semibold mb-4">Edit Ticket</h4>
+            <form [formGroup]="editTicketForm" (ngSubmit)="onSubmit()">
+                <div class="mb-4">
+                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <input 
+                        type="text" 
+                        id="description" 
+                        formControlName="description" 
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-green-500 focus:ring focus:ring-green-500" 
+                        required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                    <select 
+                        id="status" 
+                        formControlName="status" 
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-green-500 focus:ring focus:ring-green-500" 
+                        required>
+                        <option value="Open">Open</option>
+                        <option value="Closed">Closed</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+                    <input 
+                        type="date" 
+                        id="date" 
+                        formControlName="date" 
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-green-500 focus:ring focus:ring-green-500" 
+                        required>
+                </div>
+
+                <div class="flex justify-between">
+                    <button 
+                        type="button" 
+                        class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 transition duration-200"
+                        onclick="window.location.href='/'">
+                        Main Menu
+                    </button>
+                    <button 
+                        type="submit" 
+                        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-200" 
+                        [disabled]="!editTicketForm.valid">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Management</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-5">
+        <div class="bg-white shadow-md rounded-lg">
+            <div class="p-5">
+                <h4 class="text-center text-2xl font-semibold mb-4">Ticket Management</h4>
+
+                <!-- Filter Section -->
+                <div class="flex mb-4 space-x-4">
+                    <div class="flex-1">
+                        <label for="filter-description" class="block text-sm font-medium text-gray-700">Filter by Description:</label>
+                        <input type="text" id="filter-description" class="mt-1 block w-full border border-gray-300 rounded-md p-2" 
+                            [(ngModel)]="filterDescription" (ngModelChange)="updatePaginatedTickets()" placeholder="Enter description...">
+                    </div>
+                    
+                    <div class="flex-1">
+                        <label for="filter-status" class="block text-sm font-medium text-gray-700">Filter by Status:</label>
+                        <select id="filter-status" class="mt-1 block w-full border border-gray-300 rounded-md p-2" 
+                            [(ngModel)]="filterStatus" (ngModelChange)="updatePaginatedTickets()">
+                            <option value="">All</option>
+                            <option value="Open">Open</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Responsive Table -->
+                <div class="overflow-x-auto">
+                    <table class="table-auto min-w-full bg-white border border-gray-200">
+                        <thead>
+                            <tr class="bg-green-500 text-white">
+                                <th class="py-3 px-4 border-b border-gray-200 text-left">Ticket Id</th>
+                                <th class="py-3 px-4 border-b border-gray-200 text-left">Description</th>
+                                <th class="py-3 px-4 border-b border-gray-200 text-left">Status</th>
+                                <th class="py-3 px-4 border-b border-gray-200 text-left">Date</th>
+                                <th class="py-3 px-4 border-b border-gray-200 text-left">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let ticket of paginatedTickets">
+                                <td class="py-3 px-4 border-b border-gray-200">{{ ticket.ticket_ID }}</td>
+                                <td class="py-3 px-4 border-b border-gray-200">{{ ticket.description }}</td>
+                                <td class="py-3 px-4 border-b border-gray-200">
+                                    <span class="inline-block px-2 py-1 rounded text-xs font-bold {{ ticket.status === 'Open' ? 'bg-green-500 text-white' : 'bg-red-500 text-white' }}">
+                                        {{ ticket.status }}
+                                    </span>
+                                </td>
+                                <td class="py-3 px-4 border-b border-gray-200">{{ ticket.date | date: 'MMM-dd-yyyy' }}</td>
+                                <td class="py-3 px-4 border-b border-gray-200">
+                                    <a class="text-blue-500 hover:underline px-2 transition duration-200 mr-2 cursor-pointer" 
+                                       [routerLink]="['/edit', ticket.ticket_ID]">Update</a>
+                                    <a class="text-red-500 hover:underline px-2 transition duration-200 cursor-pointer" 
+                                       (click)="deleteTicket(ticket.ticket_ID)">Delete</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Add New Ticket button -->
+                <div class="text-end mb-3 mt-4">
+                    <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-200" [routerLink]="['/add']">Add New Ticket</button>
+                </div>                
+                
+                <!-- Pagination controls -->
+                <div class="flex flex-col items-center mt-4">
+                    <div class="flex items-center space-x-4">
+                        <button (click)="previousPage()" 
+                                [disabled]="currentPage === 1" 
+                                class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 transition duration-200 disabled:opacity-50">
+                            Previous
+                        </button>
+                        <span class="text-lg">Page {{ currentPage }} of {{ totalPages }}</span>
+                        <button (click)="nextPage()" 
+                                [disabled]="currentPage === totalPages" 
+                                class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 transition duration-200 disabled:opacity-50">
+                            Next
+                        </button>
+                    </div>
+                    
+                    <!-- Page Numbers -->
+                    <div class="flex mt-2 space-x-2">
+                        <button *ngFor="let page of getPageNumbers()"
+                                (click)="goToPage(page)"
+                                [class]="currentPage === page ? 'bg-green-500 text-white px-3 py-1 rounded' : 'bg-gray-200 text-gray-700 px-3 py-1 rounded hover:bg-gray-300'"
+                                [disabled]="currentPage === page">
+                            {{ page }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
