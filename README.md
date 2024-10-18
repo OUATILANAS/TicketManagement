@@ -11,7 +11,7 @@ Before you begin, ensure you have met the following requirements:
 - .NET 8 SDK installed
 - Node.js and npm installed
 - SQL Server installed
-- Angular CLI installed (if you need to work on the frontend)
+- Angular CLI installed
 
 ## Installation
 
@@ -83,3 +83,11 @@ Once both the backend and frontend are running, you can interact with the applic
 API documentation is available using tools like Swagger (if implemented) at:
 
 http://localhost:5296/swagger
+
+### Demo
+
+
+
+
+https://github.com/user-attachments/assets/f31d0ba0-97b3-4265-8d11-a4130e8af974
+
