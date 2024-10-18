@@ -62,17 +62,18 @@ Follow these steps to set up the application:
 1. Navigate to the frontend directory:
 
    cd ../../frontend
+
    cd TicketManagementApp
 
-2. Install the frontend dependencies:
+3. Install the frontend dependencies:
 
    npm install
 
-3. Start the frontend application:
+4. Start the frontend application:
 
    ng serve
 
-4. Open your browser and navigate to http://localhost:4200 to view the application.
+5. Open your browser and navigate to http://localhost:4200 to view the application.
 
 ### Usage
 
@@ -80,7 +81,7 @@ Once both the backend and frontend are running, you can interact with the applic
 
 ### API Documentation
 
-API documentation is available using tools like Swagger (if implemented) at:
+API documentation is available using Swagger at:
 
 http://localhost:5296/swagger
 
